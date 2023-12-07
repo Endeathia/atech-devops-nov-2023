@@ -1,4 +1,4 @@
-name: Bash poject test3
+name: Bash poject test
 on:
   push:
     branches:
