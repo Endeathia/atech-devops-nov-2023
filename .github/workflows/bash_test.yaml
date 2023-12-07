@@ -1,8 +1,9 @@
-name: Bash poject test
+name: Bash project test
+
 on:
   push:
     branches:
-      - 'bash_project/*'  # Make sure to use single quotes around patterns
+      - 'bash_project/*'
 
 jobs:
   test:
@@ -13,4 +14,5 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run test
-        run: bash bash_project/test.sh
+        run: |
+          sudo bash bash_project/test.sh
