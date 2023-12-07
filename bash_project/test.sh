@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 
 USER_PASS=1234
