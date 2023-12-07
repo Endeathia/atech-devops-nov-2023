@@ -1,42 +1,41 @@
 #!/bin/bash
 
-echo "Hello $USER"
+# Greeting
+echo "Hello $USER!"
 
-# Define an environment variable
-export COURSE_ID=DevOpsBootcampElevation
+# Setting environment variable
+export COURSE_ID="DevOpsBootcampElevation"
 
-# Check the token file permissions
-token="$HOME/.token"
-if [ -e "$token" ]; then
-  if [[ $(stat -c %a "$token") != "600" ]]; then
-        echo "Warning: .token file has too open permissions"
+# Checking and adjusting permissions for .token file
+if [ -f ~/.token ]; then
+    if [[ $(stat -c '%a' ~/.token) != "600" ]]; then
+        echo 'Warning: .token file has too open permissions'
     fi
 fi
 
-# Change umask
+# Setting umask to restrict default permissions
 umask 0006
 
-# Add to end of path
-export PATH="$PATH:/home/$USER/usercommands"
+# Adding custom command directory to PATH
+export PATH=$PATH:/home/$USER/usercommands
 
-# Print current date
-echo "Date: $(date -u +'%Y-%m-%dT%H:%M:%S%z')"
+# Displaying current date in ISO 8601 format
+date -u --iso-8601=seconds
 
-# Define a command alias
+# Creating an alias for listing .txt files
 alias ltxt='ls *.txt'
 
-# Create /tmp directory if it doesn't exist, and clean it if it does
-tmp_dir=~/tmp
-if [ ! -d "$tmp_dir" ]; then
-    mkdir "$tmp_dir"
+# Managing temporary directory
+if [ ! -d ~/tmp ]; then
+    mkdir ~/tmp
 else
-    rm -rf "$tmp_dir"/*
+    rm -rf ~/tmp/*
 fi
 
-# Kill process bound to port 8080 if it exists
-process=$(lsof -i :8080 -t)
-if [ -n "$process" ]; then
-    kill "$process"
+# Checking and terminating process on port 8080
+if lsof -Pi :8080 -sTCP:LISTEN -t >/dev/null; then
+    echo "Terminating the process running on port 8080..."
+    kill -9 $(lsof -t -i:8080)
+else
+    echo "No process is currently running on port 8080."
 fi
-
-echo "alexey :D"
