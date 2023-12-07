@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Greeting
 echo "Hello $USER!"
 
