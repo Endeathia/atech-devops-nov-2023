@@ -2,29 +2,57 @@
 
 
 
+
+
+
+
 if [[  -z ${KEY_PATH} ]]
+
+
 
 then
 
+
+
         echo "KEY_PATH env var is expected"
+
+
 
         exit 5
 
+
+
 fi
 
+
+
 ####
+
+
 
 USER="ubuntu"
 
 
 
+
+
+
+
 if [[ $# != 1 ]]
+
+
 
 then
 
+
+
         echo "Please provide IP address"
 
+
+
         exit 5
+
+
 
 fi
 
@@ -32,9 +60,9 @@ fi
 
 #Generate a ssh Key-Pair
 
+
+
 ssh-keygen -t rsa -N "" -f new_key
-
-
 
 # Copy the public Key to the private instance
 
@@ -49,6 +77,10 @@ ssh -i $KEY_PATH ubuntu@$1 "cat new_key.pub >> ~/.ssh/authorized_keys && rm new_
 #remove the key from Public Instance
 
 rm new_key new_key.pub
+
+
+
+
 
 
 

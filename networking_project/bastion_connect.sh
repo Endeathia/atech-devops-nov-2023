@@ -12,6 +12,10 @@ then
 
 fi
 
+
+
+
+
 if [ "$#" -lt 1 ]; then
 
     echo "Please provide bastion IP address"
@@ -20,7 +24,13 @@ if [ "$#" -lt 1 ]; then
 
 fi
 
+
+
+
+
 USER="ubuntu"
+
+
 
 # Connect to Public Instance
 
@@ -36,9 +46,9 @@ fi
 
 ##Start the Agent and add the Key
 
-eval $(ssh-agent -s)
+#eval $(ssh-agent -s)
 
-ssh-add $KEY_PATH
+#ssh-add $KEY_PATH
 
 
 
@@ -48,7 +58,11 @@ if [[ $# == 2 ]]
 
 then
 
-         ssh -o StrictHostKeyChecking=no -i "$KEY_PATH" -J "$USER@$1" "$USER@$2"
+        ssh -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1 -t "ssh -o StrictHostKeyChecking=no ubuntu@$2 -i \$(echo \$KEY_PATH)"
+
+         #ssh -o StrictHostKeyChecking=no -i "$KEY_PATH" -J "$USER@$1" "$USER@$2"
+
+
 
 fi
 
@@ -58,8 +72,13 @@ if [[ $# == 3 ]]
 
 then
 
-        ssh -o StrictHostKeyChecking=no -i "$KEY_PATH" -J "$USER@$1" "$USER@$2"
+        ssh -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1 -t "ssh -o StrictHostKeyChecking=no ubuntu@$2 -i \$(echo \$KEY_PATH)" $3
+
+        #ssh -o StrictHostKeyChecking=no -i "$KEY_PATH" -J "$USER@$1" "$USER@$2"
 
 fi
 
+
+
 ###########################################################################################
+
