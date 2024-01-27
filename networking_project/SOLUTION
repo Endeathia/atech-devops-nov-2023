@@ -13,12 +13,7 @@ Default gateway IP
 DHCP IP allocation sys-logs
 -------------------
 <logs-here>
-Jan 15 20:47:12 ip-10-0-0-87 dhclient[272]: DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 3 (xid=0xc3f59e5c)
-Jan 15 20:47:12 ip-10-0-0-87 dhclient[272]: DHCPOFFER of 10.0.0.87 from 10.0.0.1
-Jan 15 20:47:12 ip-10-0-0-87 dhclient[272]: DHCPREQUEST for 10.0.0.87 on eth0 to 255.255.255.255 port 67 (xid=0x5c9ef5c3)
-Jan 15 20:47:12 ip-10-0-0-87 dhclient[272]: DHCPACK of 10.0.0.87 from 10.0.0.1 (xid=0xc3f59e5c)
-
-Jan 15 21:15:50 ip-10-0-0-87 dhclient[282]: DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 3 (xid=0x29447f0a)
-Jan 15 21:15:50 ip-10-0-0-87 dhclient[282]: DHCPOFFER of 10.0.0.87 from 10.0.0.1
-Jan 15 21:15:50 ip-10-0-0-87 dhclient[282]: DHCPREQUEST for 10.0.0.87 on eth0 to 255.255.255.255 port 67 (xid=0xa7f4429)
-Jan 15 21:15:50 ip-10-0-0-87 dhclient[282]: DHCPACK of 10.0.0.87 from 10.0.0.1 (xid=0x29447f0a)
+Jan 27 09:45:04 ip-10-0-0-181 dhclient[273]: DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 3 (xid=0xa95c1e45)
+Jan 27 09:45:04 ip-10-0-0-181 dhclient[273]: DHCPOFFER of 10.0.0.181 from 10.0.0.1
+Jan 27 09:45:04 ip-10-0-0-181 dhclient[273]: DHCPREQUEST for 10.0.0.181 on eth0 to 255.255.255.255 port 67 (xid=0x451e5ca9)
+Jan 27 09:45:04 ip-10-0-0-181 dhclient[273]: DHCPACK of 10.0.0.181 from 10.0.0.1 (xid=0xa95c1e45)
