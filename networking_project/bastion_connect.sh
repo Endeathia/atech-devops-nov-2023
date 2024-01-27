@@ -12,10 +12,6 @@ then
 
 fi
 
-
-
-
-
 if [ "$#" -lt 1 ]; then
 
     echo "Please provide bastion IP address"
@@ -24,13 +20,7 @@ if [ "$#" -lt 1 ]; then
 
 fi
 
-
-
-
-
 USER="ubuntu"
-
-
 
 # Connect to Public Instance
 
@@ -71,7 +61,5 @@ then
         ssh -o StrictHostKeyChecking=no -i "$KEY_PATH" -J "$USER@$1" "$USER@$2"
 
 fi
-
-
 
 ###########################################################################################
