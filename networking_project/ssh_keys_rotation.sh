@@ -66,11 +66,11 @@ ssh-keygen -t rsa -N "" -f new_key
 
 # Copy the public Key to the private instance
 
-scp -i $KEY_PATH new_key.pub ubuntu@$1:~/
+scp -i $KEY_PATH ~/new_key.pub ubuntu@$1:~/
 
 ## Copy the contents of the public key to Authorized Files and remove the key from the private instance
 
-ssh -i $KEY_PATH ubuntu@$1 "cat new_key.pub >> ~/.ssh/authorized_keys && rm new_key.pub"
+ssh -i $KEY_PATH ubuntu@$1 "cat ~/new_key.pub >> ~/.ssh/authorized_keys && rm new_key.pub"
 
 
 
@@ -80,8 +80,5 @@ rm new_key new_key.pub
 
 
 
-
-
-
-
 echo "Key rotation successful."
+

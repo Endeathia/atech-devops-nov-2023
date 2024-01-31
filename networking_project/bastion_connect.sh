@@ -30,7 +30,7 @@ fi
 
 USER="ubuntu"
 
-
+NEW=$(ssh -q -o StrictHostKeyChecking=no -i $KEY_PATH ubuntu@$1  'ls new_key > /dev/null; echo $?')
 
 # Connect to Public Instance
 
@@ -58,9 +58,19 @@ if [[ $# == 2 ]]
 
 then
 
-        ssh -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1 -t "ssh -o StrictHostKeyChecking=no ubuntu@$2 -i \$(echo \$KEY_PATH)"
+        if [[ $NEW -eq 0 ]];
 
-         #ssh -o StrictHostKeyChecking=no -i "$KEY_PATH" -J "$USER@$1" "$USER@$2"
+        then
+
+                scp -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1:new_key new_key
+
+                ssh -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1 -t "ssh -o StrictHostKeyChecking=no ubuntu@$2 -i new_key"
+
+        else
+
+                ssh -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1 -t "ssh -o StrictHostKeyChecking=no ubuntu@$2 -i $KEY_PATH"
+
+        fi
 
 
 
@@ -72,13 +82,16 @@ if [[ $# == 3 ]]
 
 then
 
-        ssh -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1 -t "ssh -o StrictHostKeyChecking=no ubuntu@$2 -i \$(echo \$KEY_PATH)" $3
+        if [[ $NEW -eq 0 ]];
 
-        #ssh -o StrictHostKeyChecking=no -i "$KEY_PATH" -J "$USER@$1" "$USER@$2"
+        then
 
-fi
+                scp -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1:new_key new_key
 
+                ssh -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1 -t "ssh -o StrictHostKeyChecking=no ubuntu@$2 -i new_key -t $3"
 
+        else
 
-###########################################################################################
-
+                ssh -q -o StrictHostKeyChecking=no -i "$KEY_PATH" ubuntu@$1 -t "ssh -o StrictHostKeyChecking=no ubuntu@$2 -i $KEY_PATH -t $3"
+                fi
+        fi
